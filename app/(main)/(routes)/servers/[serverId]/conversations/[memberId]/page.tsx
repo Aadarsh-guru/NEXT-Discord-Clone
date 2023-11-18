@@ -6,6 +6,7 @@ import { getOrCreateConversation } from '@/lib/conversation'
 import { currentProfile } from '@/lib/current-profile'
 import { db } from '@/lib/db'
 import { redirectToSignIn } from '@clerk/nextjs'
+import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 
 interface MemberIdPageProps {
@@ -16,6 +17,11 @@ interface MemberIdPageProps {
     searchParams: {
         video?: boolean;
     }
+}
+
+export const metadata: Metadata = {
+    title: 'Discord Clone - Chat',
+    description: 'Chat with person to person',
 }
 
 const MemberIdPage = async ({ params, searchParams }: MemberIdPageProps) => {

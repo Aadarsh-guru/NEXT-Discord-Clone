@@ -6,12 +6,25 @@ import { currentProfile } from '@/lib/current-profile'
 import { db } from '@/lib/db'
 import { redirectToSignIn } from '@clerk/nextjs'
 import { ChannelType } from '@prisma/client'
+import { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 
 interface ChannelIdPageProps {
     params: {
         serverId: string,
         channelId: string
+    }
+}
+
+export async function generateMetadata({ params }: ChannelIdPageProps) {
+    const channel = await db.channel.findUnique({
+        where: {
+            id: params.channelId
+        }
+    });
+    return {
+        title: channel?.name,
+        description: channel?.type
     }
 }
 
@@ -45,6 +58,7 @@ const ChannelIdPage = async ({ params }: ChannelIdPageProps) => {
                 serverId={params.serverId}
                 name={channel.name}
                 type='channel'
+                channelType={channel.type}
             />
             {channel.type === ChannelType.TEXT && (
                 <>
