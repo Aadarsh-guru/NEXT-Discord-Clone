@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: ChannelIdPageProps) {
         }
     });
     return {
-        title: channel?.name,
+        title: `Discord Clone - ${channel?.name.charAt(0).toUpperCase()}${channel?.name.slice(1)}`,
         description: channel?.type
     }
 }
