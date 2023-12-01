@@ -40,7 +40,7 @@ export const useChatQuery = ({
         queryKey: [queryKey],
         queryFn: fetchMessages,
         getNextPageParam: (lastPage) => lastPage?.nextCursor,
-        refetchInterval: 1000,
+        refetchInterval: 100,
     });
 
     return {
